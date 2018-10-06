@@ -1,0 +1,30 @@
+{    
+      "manifest_version": 2,
+      "name": "SkipIntro: Auto Skip Netflix and Amazon Prime Video Intros",
+      "short_name": "SkipIntro",
+      "description": "Skip opening intro sequences automatically on Netflix & Prime Video when available.",
+      "version": "1.0",
+    
+      "browser_action": {
+        "default_icon": "icon64.png",
+        "default_popup": "popup.html"
+      },
+    
+      "icons": {
+        "16": "icon16.png",
+        "48": "icon48.png",
+        "64": "icon64.png",
+        "128": "icon128.png"
+      },
+    
+      "content_scripts": [
+        {
+          "matches": ["https://www.amazon.com/*","https://www.netflix.com/*"],
+          "js": ["skip.js"]
+        }
+      ],"permissions": [
+        "storage"
+      ]
+    
+  }
+    

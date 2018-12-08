@@ -1,6 +1,5 @@
 checkSite = n => {
     chrome.storage.sync.get('onOffTesting',function(result){
-        console.log(result.onOffTesting)
         if(result.onOffTesting !== "off") {
             let matchClass = '.skipElement'
             if(window.location.origin.includes('netflix')) {
@@ -18,11 +17,24 @@ checkAddedNodes = n => n.addedNodes.forEach(checkSite);
 
 skip = (n, m) => {
     if (m === '.skip-credits') {
-        n.firstChild.click();
+        doClick(n).then(doGetPlayButton());
     } else {
         n.click();
     }
+}
 
+function doClick(n) {
+    return new Promise(function(resolve) {
+        resolve(n.firstChild.click());
+    });
+}
+
+function doGetPlayButton() {
+    var c = document.getElementsByClassName("PlayerControlsNeo__button-control-row");
+    var d = c.item(0)
+    if(d.parentNode.classList.contains("PlayerControlsNeo__bottom-controls--faded")){
+        d.firstChild.click()
+    }
 }
 
 const obs = new MutationObserver(m => m.map(checkAddedNodes));

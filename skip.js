@@ -6,7 +6,7 @@ let key_up_event = new KeyboardEvent('keyup',{"altKey": false,"bubbles": true,"c
 checkSite = n => {
     chrome.storage.sync.get('onOffTesting',function(result){
         if(result.onOffTesting !== "off") {
-            if (n.innerText === 'SKIP INTRO') {
+            if (n.innerText.toUpperCase() === 'SKIP INTRO') {
                 skip(parentClass)
             }
         }
